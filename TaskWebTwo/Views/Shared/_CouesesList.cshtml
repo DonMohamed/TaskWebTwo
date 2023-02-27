@@ -1,0 +1,61 @@
+﻿@model List<TaskWebTwo.Dtos.CourseInfoDto>
+@inject TaskWebTwo.Models.StudentCourseTaskContext _context
+
+@if (Model != null && Model.Any())
+{
+    <div id="divid row">
+        <h4 class="mt-5 mb-3" style="color:#106b62;">المواد</h4>
+        <div class="row">
+            <div class="col-md-12 mb-1">
+                <div class="classic-tabs">
+                    <div class="tab-content card">
+                        <!-- Panel 1 -->
+                        <div class="tab-pane fade show active" id="panel83" role="tabpanel">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead style="color: #e4a11b;">
+                                        <tr>
+                                            <th>#</th>
+                                            <th>المادة الدراسية</th>
+                                            <th>بداية الدراسة</th>
+                                            <th>مدة الدراسة</th>
+                                            <th>المدرس</th>
+                                            <th>الأجراءات</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody style="color:#106b62;">
+                                        @for (int i = 0; i < Model.Count; i++)
+                                        {
+                                            var namecourse = "";
+                                            var nameTecher = "";
+                                            if (!string.IsNullOrEmpty(Model[i].CourseId))
+                                                 namecourse = _context.Courses.SingleOrDefault(r => r.Id == Convert.ToInt32(Model[i].CourseId)).CourseName;
+                                            if (!string.IsNullOrEmpty(Model[i].TeacherNameId))
+                                                nameTecher = _context.Teachers.SingleOrDefault(r => r.Id == Convert.ToInt32(Model[i].TeacherNameId)).Name;
+                                          
+
+                                            <tr>
+                                                <th scope="row">@(i + 1)</th>
+                                                <td>@namecourse</td>
+                                                <td>@Model[i].startingCourse.ToString("dd-MM-yyyy")</td>
+                                                <td>@Model[i].StudyPeriod</td>
+                                                <td>@nameTecher</td>
+                                                <td>
+                                                    <a name="@i" class="orange-text mx-2 " onclick="someFunction(@i)" data-toggle="tooltip" data-placement="top" title="Remove"> <i class="bi bi-trash"></i></a>
+                                                </td>
+                                            </tr>
+                                        }
+
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}

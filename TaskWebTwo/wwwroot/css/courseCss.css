@@ -1,0 +1,11 @@
+﻿@media (min-width: 992px) {
+    .marginStyle {
+        margin: 0px 150px;
+    }
+}
+
+@media (max-width: 991px) {
+    .marginStyle {
+        margin: 0px 50px;
+    }
+}
